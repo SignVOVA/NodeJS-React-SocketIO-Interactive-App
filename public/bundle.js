@@ -20434,6 +20434,7 @@
 
 	var React = __webpack_require__(1);
 	var io = __webpack_require__(158);
+	var Header = __webpack_require__(208);
 
 	var APP = React.createClass({
 			displayName: 'APP',
@@ -20449,9 +20450,9 @@
 
 			render: function render() {
 					return React.createElement(
-							'h1',
+							'div',
 							null,
-							'Hello World from React'
+							React.createElement(Header, { title: "New Header" })
 					);
 			}
 
@@ -28071,6 +28072,41 @@
 	};
 
 
+
+/***/ },
+/* 208 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+	 * Adding reusable components into the parts folder.
+	 * The file will contain header React component.
+	 */
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var Header = React.createClass({
+	    displayName: 'Header',
+
+	    propTypes: {
+	        title: React.PropTypes.string.isRequired
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'header',
+	            null,
+	            React.createElement(
+	                'h1',
+	                null,
+	                this.props.title
+	            )
+	        );
+	    }
+	});
+
+	module.exports = Header;
 
 /***/ }
 /******/ ]);
