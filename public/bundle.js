@@ -20439,20 +20439,28 @@
 	var APP = React.createClass({
 			displayName: 'APP',
 
+			getInitialState: function getInitialState() {
+					return {
+							status: 'discunnected'
+					};
+			},
+
 			componentWillMount: function componentWillMount() {
 					this.socket = io('http://localhost:3000');
 					this.socket.on('connect', this.connect);
 			},
 
 			connect: function connect() {
-					alert("Connected: " + this.socket.id);
+					// This is reffering to the React component
+					// Whenever we call setState, React is automatically reinvoke render() below and pass a different status to our render.
+					this.setState({ status: 'connected' });
 			},
 
 			render: function render() {
 					return React.createElement(
 							'div',
 							null,
-							React.createElement(Header, { title: "New Header" })
+							React.createElement(Header, { title: "Server Status", status: this.state.status })
 					);
 			}
 
@@ -28087,23 +28095,39 @@
 	var React = __webpack_require__(1);
 
 	var Header = React.createClass({
-	    displayName: 'Header',
+	  displayName: 'Header',
 
-	    propTypes: {
-	        title: React.PropTypes.string.isRequired
-	    },
+	  propTypes: {
+	    title: React.PropTypes.string.isRequired
+	  },
 
-	    render: function render() {
-	        return React.createElement(
-	            'header',
-	            null,
-	            React.createElement(
-	                'h1',
-	                null,
-	                this.props.title
-	            )
-	        );
-	    }
+	  //Default React method
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      status: 'discunnected'
+	    };
+	  },
+
+	  render: function render() {
+	    return React.createElement(
+	      'header',
+	      { className: "row" },
+	      React.createElement(
+	        'div',
+	        { className: "col-xs-6" },
+	        React.createElement(
+	          'h2',
+	          null,
+	          this.props.title
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: "col-xs-6" },
+	        React.createElement('span', { id: "connection-status", className: this.props.status })
+	      )
+	    );
+	  }
 	});
 
 	module.exports = Header;
