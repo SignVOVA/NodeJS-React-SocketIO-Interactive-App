@@ -1,0 +1,23 @@
+{
+  "name": "live-polling",
+  "version": "0.0.1",
+  "description": "An app that allows speakers to poll audience members",
+  "main": "app-server.js",
+  "dependencies": {
+    "babel-core": "^5.8.12",
+    "babel-loader": "^5.3.2",
+    "bootstrap": "^3.3.5",
+    "express": "^4.13.1",
+    "react": "^0.13.3",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8",
+    "webpack": "^1.10.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "prestart": "webpack",
+    "start": "node app-server.js"
+  },
+  "author": "Volodymyr Maksymchuk",
+  "license": "MIT"
+}
