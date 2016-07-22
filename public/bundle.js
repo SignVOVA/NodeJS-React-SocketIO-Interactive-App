@@ -20441,7 +20441,8 @@
 
 			getInitialState: function getInitialState() {
 					return {
-							status: 'discunnected'
+							status: 'discunnected',
+							title: ''
 					};
 			},
 
@@ -20451,6 +20452,8 @@
 					// Adding listener for disconnect, when socket disconnect we firethe disconnect event handler.
 					// We need to create a disconnect event handler for this.
 					this.socket.on('disconnect', this.disconnect);
+					// Wire up another listener
+					this.socket.on('welcome', this.welcome);
 			},
 
 			connect: function connect() {
@@ -20463,11 +20466,15 @@
 					this.setState({ status: 'disconnected' });
 			},
 
+			welcome: function welcome(serverState) {
+					this.setState({ title: serverState.title });
+			},
+
 			render: function render() {
 					return React.createElement(
 							'div',
 							null,
-							React.createElement(Header, { title: "Server Status", status: this.state.status })
+							React.createElement(Header, { title: this.state.title, status: this.state.status })
 					);
 			}
 

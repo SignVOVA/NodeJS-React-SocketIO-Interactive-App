@@ -6,7 +6,8 @@ var APP = React.createClass({
 
 		getInitialState() {
 				return {
-					status: 'discunnected'
+					status: 'discunnected',
+					title: ''
 				}
 		},
 
@@ -16,6 +17,8 @@ var APP = React.createClass({
 				// Adding listener for disconnect, when socket disconnect we firethe disconnect event handler.
 				// We need to create a disconnect event handler for this.
 				this.socket.on('disconnect', this.disconnect);
+				// Wire up another listener
+				this.socket.on('welcome', this.welcome);
 		},
 
 		connect() {
@@ -28,10 +31,14 @@ var APP = React.createClass({
 			this.setState({ status: 'disconnected'});
 		},
 
+		welcome(serverState) {
+			this.setState({ title: serverState.title});
+		},
+
 		render() {
 				return (
 						<div>
-								<Header title="Server Status" status={this.state.status} />
+								<Header title={this.state.title} status={this.state.status} />
 						</div>
 				);
 		}
