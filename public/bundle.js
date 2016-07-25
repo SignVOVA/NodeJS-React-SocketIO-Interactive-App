@@ -31451,7 +31451,7 @@
 						Display,
 						{ 'if': this.props.member.name },
 						React.createElement(
-							'h2',
+							'h1',
 							null,
 							'Welcome ',
 							this.props.member.name

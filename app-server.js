@@ -1,4 +1,5 @@
 var express = require('express');
+var _ = require('underscore');
 var app = express();
 
 var connections = [];
@@ -14,6 +15,15 @@ var io = require('socket.io').listen(server);
 io.sockets.on('connection', function (socket) {
   // Now we add a disonnect event. socket.once - when this socket diconnects. When it happens we can hadle this is the callback funciton
 	socket.once('disconnect', function() {
+
+		var member = _.findWhere(audience, { id: this.id });
+
+		if (member) {
+			audience.splice(audience.indexOf(member), 1);
+			io.sockets.emit('audience', audience);
+			console.log("Left: %s (%s audience members)", member.name, audience.length)
+		}
+
     // We are going to use splice to remove that connection from the array.
     // By using the indexOf we find the current connection
     connections.splice(connections.indexOf(socket), 1);
