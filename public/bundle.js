@@ -23706,58 +23706,58 @@
 	var Header = __webpack_require__(250);
 
 	var APP = React.createClass({
-			displayName: 'APP',
+	    displayName: 'APP',
 
-			getInitialState: function getInitialState() {
-					return {
-							status: 'disconnected',
-							title: '',
-							member: {}
-					};
-			},
+	    getInitialState: function getInitialState() {
+	        return {
+	            status: 'disconnected',
+	            title: '',
+	            member: {},
+	            audience: []
+	        };
+	    },
 
-			componentWillMount: function componentWillMount() {
-					this.socket = io('http://localhost:3000');
-					this.socket.on('connect', this.connect);
-					// Adding listener for disconnect, when socket disconnect we firethe disconnect event handler.
-					// We need to create a disconnect event handler for this.
-					this.socket.on('disconnect', this.disconnect);
-					// Wire up another listener
-					this.socket.on('welcome', this.welcome);
-					this.socket.on('joined', this.joined);
-			},
+	    componentWillMount: function componentWillMount() {
+	        this.socket = io('http://localhost:3000');
+	        this.socket.on('connect', this.connect);
+	        this.socket.on('disconnect', this.disconnect);
+	        this.socket.on('welcome', this.welcome);
+	        this.socket.on('joined', this.joined);
+	        this.socket.on('audience', this.updateAudience);
+	    },
 
-			emit: function emit(eventName, payload) {
-					this.socket.emit(eventName, payload);
-			},
+	    emit: function emit(eventName, payload) {
+	        this.socket.emit(eventName, payload);
+	    },
 
-			connect: function connect() {
-					// This is reffering to the React component
-					// Whenever we call setState, React is automatically reinvoke render() below and pass a different status to our render.
-					this.setState({ status: 'connected' });
-			},
+	    connect: function connect() {
+	        this.setState({ status: 'connected' });
+	    },
 
-			disconnect: function disconnect() {
-					this.setState({ status: 'disconnected' });
-			},
+	    disconnect: function disconnect() {
+	        this.setState({ status: 'disconnected' });
+	    },
 
-			welcome: function welcome(serverState) {
-					this.setState({ title: serverState.title });
-			},
+	    welcome: function welcome(serverState) {
+	        this.setState({ title: serverState.title });
+	    },
 
-			joined: function joined(member) {
-					this.setState({ member: member });
-			},
+	    joined: function joined(member) {
+	        this.setState({ member: member });
+	    },
 
-			// '{...this.state}' allows us to pass the whole object instead of declated variables
-			render: function render() {
-					return React.createElement(
-							'div',
-							null,
-							React.createElement(Header, { title: this.state.title, status: this.state.status }),
-							React.createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
-					);
-			}
+	    updateAudience: function updateAudience(newAudience) {
+	        this.setState({ audience: newAudience });
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(Header, { title: this.state.title, status: this.state.status }),
+	            React.createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
+	        );
+	    }
 
 	});
 
@@ -31451,10 +31451,16 @@
 						Display,
 						{ 'if': this.props.member.name },
 						React.createElement(
-							'h3',
+							'h2',
 							null,
 							'Welcome ',
 							this.props.member.name
+						),
+						React.createElement(
+							'p',
+							null,
+							this.props.audience.length,
+							' audience members connected'
 						),
 						React.createElement(
 							'p',
