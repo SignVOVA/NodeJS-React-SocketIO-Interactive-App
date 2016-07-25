@@ -11,24 +11,21 @@ var server = app.listen(3000);
 var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function (socket) {
-
-    // Now we add a disonnect event. socket.once - when this socket diconnects. When it happens we can hadle this is the callback funciton
-    socket.once('disconnect', function() {
-      // We are going to use splice to remove that connection from the array.
-      // By using the indexOf we find the current connection
-      connections.splice(connections.indexOf(socket), 1);
-  		socket.disconnect();
-  		console.log("Disconnected: %s sockets remaining.", connections.length);
-    });
-
-    // socket.emit is used to emit events that can be handled by the client
-    socket.emit('welcome', {
-      title: title
-    });
-
-    // This will handle once socket connects, we add the socket id to the array
-    connections.push(socket);
-      console.log("Connected: %s sockets connected.", connections.length);
-  });
+  // Now we add a disonnect event. socket.once - when this socket diconnects. When it happens we can hadle this is the callback funciton
+	socket.once('disconnect', function() {
+    // We are going to use splice to remove that connection from the array.
+    // By using the indexOf we find the current connection
+    connections.splice(connections.indexOf(socket), 1);
+		socket.disconnect();
+		console.log("Disconnected: %s sockets remaining.", connections.length);
+	});
+  // socket.emit is used to emit events that can be handled by the client
+	socket.emit('welcome', {
+		title: title
+	});
+  // This will handle once socket connects, we add the socket id to the array
+	connections.push(socket);
+    console.log("Connected: %s sockets connected.", connections.length);
+});
 
 console.log("Polling server is running at 'http://localhost:3000'");
