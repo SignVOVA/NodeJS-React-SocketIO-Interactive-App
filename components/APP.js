@@ -10,7 +10,8 @@ var APP = React.createClass({
 	getInitialState() {
 			return {
 				status: 'disconnected',
-				title: ''
+				title: '',
+				anyElement: 'I can be any value'
 			}
 	},
 
@@ -38,11 +39,12 @@ var APP = React.createClass({
 		this.setState({ title: serverState.title });
 	},
 
+	// '{...this.state}' allows us to pass the whole object instead of declated variables
 	render() {
 			return (
 					<div>
 							<Header title={this.state.title} status={this.state.status} />
-							<RouteHandler />
+							<RouteHandler {...this.state} />
 					</div>
 			);
 	}

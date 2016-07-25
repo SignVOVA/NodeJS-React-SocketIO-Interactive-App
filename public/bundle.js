@@ -83,7 +83,8 @@
 	    return React.createElement(
 	      'h1',
 	      null,
-	      'Audience'
+	      'Audience : ',
+	      this.props.title
 	    );
 	  }
 	});
@@ -23728,7 +23729,8 @@
 			getInitialState: function getInitialState() {
 					return {
 							status: 'disconnected',
-							title: ''
+							title: '',
+							anyElement: 'yes please'
 					};
 			},
 
@@ -23756,12 +23758,13 @@
 					this.setState({ title: serverState.title });
 			},
 
+			// '{...this.state}' allows us to pass the whole object instead of declated variables
 			render: function render() {
 					return React.createElement(
 							'div',
 							null,
 							React.createElement(Header, { title: this.state.title, status: this.state.status }),
-							React.createElement(RouteHandler, null)
+							React.createElement(RouteHandler, this.state)
 					);
 			}
 
@@ -31448,7 +31451,8 @@
 	    return React.createElement(
 	      'h1',
 	      null,
-	      'Speaker'
+	      'Speaker : ',
+	      this.props.status
 	    );
 	  }
 	});
@@ -31470,7 +31474,8 @@
 	    return React.createElement(
 	      'h1',
 	      null,
-	      'Board'
+	      'Board : ',
+	      this.props.anyElement
 	    );
 	  }
 	});
