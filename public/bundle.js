@@ -23731,6 +23731,13 @@
 	    },
 
 	    connect: function connect() {
+
+	        var member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null;
+
+	        if (member) {
+	            this.emit('join', member);
+	        }
+
 	        this.setState({ status: 'connected' });
 	    },
 
@@ -23743,6 +23750,7 @@
 	    },
 
 	    joined: function joined(member) {
+	        sessionStorage.member = JSON.stringify(member);
 	        this.setState({ member: member });
 	    },
 
