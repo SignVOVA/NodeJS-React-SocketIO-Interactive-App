@@ -23712,7 +23712,7 @@
 					return {
 							status: 'disconnected',
 							title: '',
-							anyElement: 'I can be any value'
+							member: {}
 					};
 			},
 
@@ -23724,6 +23724,7 @@
 					this.socket.on('disconnect', this.disconnect);
 					// Wire up another listener
 					this.socket.on('welcome', this.welcome);
+					this.socket.on('joined', this.joined);
 			},
 
 			emit: function emit(eventName, payload) {
@@ -23742,6 +23743,10 @@
 
 			welcome: function welcome(serverState) {
 					this.setState({ title: serverState.title });
+			},
+
+			joined: function joined(member) {
+					this.setState({ member: member });
 			},
 
 			// '{...this.state}' allows us to pass the whole object instead of declated variables
@@ -31443,11 +31448,30 @@
 					Display,
 					{ 'if': this.props.status === 'connected' },
 					React.createElement(
-						'h1',
-						null,
-						'Join the session'
+						Display,
+						{ 'if': this.props.member.name },
+						React.createElement(
+							'h3',
+							null,
+							'Welcome ',
+							this.props.member.name
+						),
+						React.createElement(
+							'p',
+							null,
+							'Questions will appear here.'
+						)
 					),
-					React.createElement(Join, { emit: this.props.emit })
+					React.createElement(
+						Display,
+						{ 'if': !this.props.member.name },
+						React.createElement(
+							'h1',
+							null,
+							'Join the session'
+						),
+						React.createElement(Join, { emit: this.props.emit })
+					)
 				)
 			);
 		}

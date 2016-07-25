@@ -11,7 +11,7 @@ var APP = React.createClass({
 			return {
 				status: 'disconnected',
 				title: '',
-				anyElement: 'I can be any value'
+				member: {}
 			}
 	},
 
@@ -23,6 +23,7 @@ var APP = React.createClass({
 			this.socket.on('disconnect', this.disconnect);
 			// Wire up another listener
 			this.socket.on('welcome', this.welcome);
+			this.socket.on('joined', this.joined);
 	},
 
 	emit(eventName, payload) {
@@ -41,6 +42,10 @@ var APP = React.createClass({
 
 	welcome(serverState) {
 		this.setState({ title: serverState.title });
+	},
+
+	joined(member) {
+		this.setState({ member: member});
 	},
 
 	// '{...this.state}' allows us to pass the whole object instead of declated variables
