@@ -1,41 +1,104 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'start' ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
 2 info using npm@2.15.5
 3 info using node@v4.4.5
-4 verbose run-script [ 'prestart', 'start', 'poststart' ]
-5 info prestart live-polling@0.0.1
-6 verbose unsafe-perm in lifecycle true
-7 info start live-polling@0.0.1
-8 verbose unsafe-perm in lifecycle true
-9 info live-polling@0.0.1 Failed to exec start script
-10 verbose stack Error: live-polling@0.0.1 start: `node app-server.js`
-10 verbose stack Exit status 1
-10 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:217:16)
-10 verbose stack     at emitTwo (events.js:87:13)
-10 verbose stack     at EventEmitter.emit (events.js:172:7)
-10 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
-10 verbose stack     at emitTwo (events.js:87:13)
-10 verbose stack     at ChildProcess.emit (events.js:172:7)
-10 verbose stack     at maybeClose (internal/child_process.js:827:16)
-10 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
-11 verbose pkgid live-polling@0.0.1
-12 verbose cwd /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
-13 error Darwin 15.2.0
-14 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "start"
-15 error node v4.4.5
-16 error npm  v2.15.5
-17 error code ELIFECYCLE
-18 error live-polling@0.0.1 start: `node app-server.js`
-18 error Exit status 1
-19 error Failed at the live-polling@0.0.1 start script 'node app-server.js'.
-19 error This is most likely a problem with the live-polling package,
-19 error not with npm itself.
-19 error Tell the author that this fails on your system:
-19 error     node app-server.js
-19 error You can get information on how to open an issue for this project with:
-19 error     npm bugs live-polling
-19 error Or if that isn't available, you can get their info via:
-19 error
-19 error     npm owner ls live-polling
-19 error There is likely additional logging output above.
-20 verbose exit [ 1, true ]
+4 verbose readDependencies loading dependencies from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/package.json
+5 warn package.json live-polling@0.0.1 No repository field.
+6 verbose install where, deps [ '/Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished',
+6 verbose install   [ 'babel-core',
+6 verbose install     'babel-loader',
+6 verbose install     'bootstrap',
+6 verbose install     'express',
+6 verbose install     'react',
+6 verbose install     'socket.io',
+6 verbose install     'socket.io-client',
+6 verbose install     'webpack' ] ]
+7 verbose install where, peers [ '/Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished',
+7 verbose install   [] ]
+8 verbose installManyTop reading for lifecycle /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/package.json
+9 info preinstall live-polling@0.0.1
+10 verbose installManyTop reading scoped package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/babel-core/package.json
+11 verbose installManyTop reading scoped package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/babel-loader/package.json
+12 verbose installManyTop reading scoped package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/bootstrap/package.json
+13 verbose installManyTop reading scoped package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/express/package.json
+14 verbose installManyTop reading scoped package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/react/package.json
+15 verbose installManyTop reading scoped package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/react-router/package.json
+16 verbose installManyTop reading scoped package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/socket.io/package.json
+17 verbose installManyTop reading scoped package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/socket.io-client/package.json
+18 verbose installManyTop reading scoped package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/webpack/package.json
+19 verbose readDependencies loading dependencies from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/package.json
+20 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/babel-core/package.json
+21 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/babel-loader/package.json
+22 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/bootstrap/package.json
+23 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/express/package.json
+24 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/react/package.json
+25 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/react-router/package.json
+26 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/socket.io/package.json
+27 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/socket.io-client/package.json
+28 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/webpack/package.json
+29 verbose targetResolver reading package data from /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/.bin/webpack/package.json
+30 verbose already installed skipping react@^0.13.3 /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+31 verbose already installed skipping socket.io@^1.4.8 /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+32 verbose already installed skipping socket.io-client@^1.4.8 /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+33 verbose already installed skipping webpack@^1.10.5 /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+34 verbose already installed skipping babel-core@^5.8.12 /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+35 verbose already installed skipping babel-loader@^5.3.2 /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+36 verbose already installed skipping bootstrap@^3.3.5 /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+37 verbose already installed skipping express@^4.13.1 /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+38 silly install resolved []
+39 info build /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+40 info linkStuff live-polling@0.0.1
+41 silly linkStuff live-polling@0.0.1 has /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03 as its parent node_modules
+42 verbose linkBins live-polling@0.0.1
+43 verbose linkMans live-polling@0.0.1
+44 verbose rebuildBundles live-polling@0.0.1
+45 verbose rebuildBundles [ '.bin',
+45 verbose rebuildBundles   'babel-core',
+45 verbose rebuildBundles   'babel-loader',
+45 verbose rebuildBundles   'bootstrap',
+45 verbose rebuildBundles   'express',
+45 verbose rebuildBundles   'react',
+45 verbose rebuildBundles   'react-router',
+45 verbose rebuildBundles   'socket.io',
+45 verbose rebuildBundles   'socket.io-client',
+45 verbose rebuildBundles   'webpack' ]
+46 verbose rebuild bundle /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/react-router
+47 info build /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules/react-router
+48 info preinstall react-router@2.6.0
+49 info linkStuff react-router@2.6.0
+50 silly linkStuff react-router@2.6.0 has /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/node_modules as its parent node_modules
+51 verbose linkBins react-router@2.6.0
+52 verbose linkMans react-router@2.6.0
+53 verbose rebuildBundles react-router@2.6.0
+54 verbose rebuildBundles [ '.bin',
+54 verbose rebuildBundles   'history',
+54 verbose rebuildBundles   'hoist-non-react-statics',
+54 verbose rebuildBundles   'invariant',
+54 verbose rebuildBundles   'loose-envify',
+54 verbose rebuildBundles   'warning' ]
+55 info install react-router@2.6.0
+56 info postinstall react-router@2.6.0
+57 info install live-polling@0.0.1
+58 info postinstall live-polling@0.0.1
+59 info prepublish live-polling@0.0.1
+60 verbose validateInstall loading /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished/package.json for validation
+61 verbose stack Error: The package react@0.13.3 does not satisfy its siblings' peerDependencies requirements!
+61 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:125:32
+61 verbose stack     at /usr/local/lib/node_modules/npm/lib/install.js:268:7
+61 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:142:5
+61 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+61 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+61 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+61 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+61 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+61 verbose stack     at cb (/usr/local/lib/node_modules/npm/node_modules/slide/lib/async-map.js:47:24)
+61 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-installed/read-installed.js:263:14
+62 verbose cwd /Users/volodymyrmaksymchuk/Documents/Workspace/NodeJS-SocketIO-React-app/Ch01/01_03/01_03_finished
+63 error Darwin 15.2.0
+64 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+65 error node v4.4.5
+66 error npm  v2.15.5
+67 error code EPEERINVALID
+68 error peerinvalid The package react@0.13.3 does not satisfy its siblings' peerDependencies requirements!
+68 error peerinvalid Peer react-router@2.6.0 wants react@^0.14.0 || ^15.0.0
+69 verbose exit [ 1, true ]
