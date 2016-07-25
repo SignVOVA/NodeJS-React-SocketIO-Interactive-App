@@ -5,6 +5,7 @@ var app = express();
 var connections = [];
 var title = 'Untitled Presentation';
 var audience = [];
+var speaker = {};
 
 app.use(express.static('./public'));
 app.use(express.static('./node_modules/bootstrap/dist'));
@@ -34,12 +35,21 @@ io.sockets.on('connection', function (socket) {
 	socket.on('join', function(payload) {
 		var newMember = {
 			id: this.id,
-			name: payload.name
+			name: payload.name,
+			type: 'member'
 		};
 		this.emit('joined', newMember);
 		audience.push(newMember);
 		io.sockets.emit('audience', audience);
 		console.log("Audience Joined: %s", payload.name);
+	});
+
+	socket.on('start', function(payload) {
+		speaker.name = payload.name;
+		speaker.id = this.id;
+		speaker.type = 'speaker';
+		this.emit('joined', speaker);
+		console.log("Presentation Started: '%s' by %s", title, speaker.name);
 	});
 
   // socket.emit is used to emit events that can be handled by the client
