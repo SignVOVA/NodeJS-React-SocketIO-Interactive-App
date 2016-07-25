@@ -25,6 +25,10 @@ var APP = React.createClass({
 			this.socket.on('welcome', this.welcome);
 	},
 
+	emit(eventName, payload) {
+		this.socket.emit(eventName, payload);
+	},
+
 	connect() {
 			// This is reffering to the React component
 			// Whenever we call setState, React is automatically reinvoke render() below and pass a different status to our render.
@@ -44,7 +48,7 @@ var APP = React.createClass({
 			return (
 					<div>
 							<Header title={this.state.title} status={this.state.status} />
-							<RouteHandler {...this.state} />
+							<RouteHandler emit={this.emit} {...this.state} />
 					</div>
 			);
 	}

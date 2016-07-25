@@ -19,6 +19,11 @@ io.sockets.on('connection', function (socket) {
 		socket.disconnect();
 		console.log("Disconnected: %s sockets remaining.", connections.length);
 	});
+
+	socket.on('join', function(payload) {
+		console.log("Audience Joined: %s", payload.name);
+	});
+
   // socket.emit is used to emit events that can be handled by the client
 	socket.emit('welcome', {
 		title: title

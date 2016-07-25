@@ -23696,6 +23696,8 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var React = __webpack_require__(1);
 	var Router = __webpack_require__(157);
 	var RouteHandler = Router.RouteHandler;
@@ -23724,6 +23726,10 @@
 					this.socket.on('welcome', this.welcome);
 			},
 
+			emit: function emit(eventName, payload) {
+					this.socket.emit(eventName, payload);
+			},
+
 			connect: function connect() {
 					// This is reffering to the React component
 					// Whenever we call setState, React is automatically reinvoke render() below and pass a different status to our render.
@@ -23744,7 +23750,7 @@
 							'div',
 							null,
 							React.createElement(Header, { title: this.state.title, status: this.state.status }),
-							React.createElement(RouteHandler, this.state)
+							React.createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
 					);
 			}
 
@@ -31441,7 +31447,7 @@
 						null,
 						'Join the session'
 					),
-					React.createElement(Join, null)
+					React.createElement(Join, { emit: this.props.emit })
 				)
 			);
 		}
@@ -31475,35 +31481,35 @@
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var Join = React.createClass({
-	  displayName: "Join",
+	  displayName: 'Join',
 
 	  join: function join() {
 	    var memberName = React.findDOMNode(this.refs.name).value;
-	    alert("TODO: Join mamber " + memberName);
+	    this.props.emit('join', { name: memberName });
 	  },
 
 	  render: function render() {
 	    return React.createElement(
-	      "form",
+	      'form',
 	      { action: "javascript:void(0)", onSubmit: this.join },
 	      React.createElement(
-	        "label",
+	        'label',
 	        null,
-	        "Full Name"
+	        'Full Name'
 	      ),
-	      React.createElement("input", { ref: "name",
+	      React.createElement('input', { ref: "name",
 	        className: "form-control",
 	        placeholder: "enter your full name...",
 	        required: true }),
 	      React.createElement(
-	        "button",
+	        'button',
 	        { className: "btn btn-primary" },
-	        "Join"
+	        'Join'
 	      )
 	    );
 	  }
