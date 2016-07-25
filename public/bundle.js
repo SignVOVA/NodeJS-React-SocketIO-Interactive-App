@@ -53,7 +53,7 @@
 	var NotFoundRoute = Router.NotFoundRoute;
 
 	var APP = __webpack_require__(199);
-	var Audience = __webpack_require__(251);
+	var Audience = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/Audience\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var Speaker = __webpack_require__(252);
 	var Board = __webpack_require__(253);
 	var Whoops404 = __webpack_require__(254);
@@ -31417,29 +31417,7 @@
 	module.exports = Header;
 
 /***/ },
-/* 251 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	var React = __webpack_require__(1);
-
-	var Audience = React.createClass({
-	  displayName: 'Audience',
-
-	  render: function render() {
-	    return React.createElement(
-	      'h1',
-	      null,
-	      'Audience : ',
-	      this.props.title
-	    );
-	  }
-	});
-
-	module.exports = Audience;
-
-/***/ },
+/* 251 */,
 /* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
