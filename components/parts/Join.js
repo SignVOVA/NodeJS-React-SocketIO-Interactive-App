@@ -1,5 +1,6 @@
 var React = require('react');
 var Link = require('react-router').Link;
+
 var Join = React.createClass({
 
   join() {
@@ -10,7 +11,6 @@ var Join = React.createClass({
   render() {
     return (
       <form action="javascript:void(0)" onSubmit={this.join}>
-
         <label>Full Name</label>
         <input ref="name"
                className="form-control"
@@ -18,7 +18,6 @@ var Join = React.createClass({
                required />
         <button className="btn btn-primary">Join</button>
         <Link to='/speaker'>Join as speaker</Link>
-
       </form>
     );
   }

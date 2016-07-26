@@ -31524,6 +31524,7 @@
 
 	var React = __webpack_require__(1);
 	var Link = __webpack_require__(157).Link;
+
 	var Join = React.createClass({
 	  displayName: 'Join',
 
@@ -31626,8 +31627,8 @@
 	  start: function start() {
 	    var speakerName = React.findDOMNode(this.refs.name).value;
 	    var title = React.findDOMNode(this.refs.title).value;
+	    alert("TODO: Join Speaker: " + speakerName + " " + title);
 	    //this.props.emit('start', { name: speakerName, title: title });
-	    alert("TODO: Join Speaker " + speakerName + " " + title);
 	  },
 
 	  render: function render() {
