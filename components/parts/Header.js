@@ -1,34 +1,31 @@
-/*
- * Adding reusable components into the parts folder.
- * The file will contain header React component.
- */
+var React = require('react');
 
- var React = require('react');
+var Header = React.createClass({
 
- var Header = React.createClass ({
-      propTypes: {
-          title: React.PropTypes.string.isRequired
-      },
+	propTypes: {
+		title: React.PropTypes.string.isRequired
+	},
 
-      //Default React method
-      getDefaultProps() {
-          return {
-            status: 'discunnected'
-          }
-      },
+	getDefaultProps() {
+		return {
+			status: 'disconnected'
+		}
+	},
 
-      render() {
-          return (
-            <header className="row">
-                <div className="col-xs-6">
-                  <h2>{this.props.title}</h2>
-                </div>
-                <div className="col-xs-6">
-                  <span id="connection-status" className={this.props.status}></span>
-                </div>
-            </header>
-          );
-      }
- });
+	render() {
+		return (
+			<header className="row">
+				<div className="col-xs-10">
+					<h2>{this.props.title}</h2>
+					<p>{this.props.speaker}</p>
+				</div>
+				<div className="col-xs-2">
+					<span id="connection-status" className={this.props.status}></span>
+				</div>
+			</header>
+		);
+	}
+
+});
 
 module.exports = Header;

@@ -24,9 +24,7 @@ io.sockets.on('connection', function (socket) {
 			io.sockets.emit('audience', audience);
 			console.log("Left: %s (%s audience members)", member.name, audience.length)
 		}
-
-    // We are going to use splice to remove that connection from the array.
-    // By using the indexOf we find the current connection
+    // We are going to use splice to remove that connection from the array. By using the indexOf we find the current connection
     connections.splice(connections.indexOf(socket), 1);
 		socket.disconnect();
 		console.log("Disconnected: %s sockets remaining.", connections.length);
@@ -36,7 +34,7 @@ io.sockets.on('connection', function (socket) {
 		var newMember = {
 			id: this.id,
 			name: payload.name,
-			type: 'member'
+			type: 'audience'
 		};
 		this.emit('joined', newMember);
 		audience.push(newMember);
@@ -48,14 +46,21 @@ io.sockets.on('connection', function (socket) {
 		speaker.name = payload.name;
 		speaker.id = this.id;
 		speaker.type = 'speaker';
+		title = payload.title;
 		this.emit('joined', speaker);
+		// Two - when the user starts the presentation.
+		io.sockets.emit('start', { title: title, speaker: speaker.name });
 		console.log("Presentation Started: '%s' by %s", title, speaker.name);
 	});
 
   // socket.emit is used to emit events that can be handled by the client
 	socket.emit('welcome', {
-		title: title
+		title: title,
+		// One - when the user joins the presentation
+		audience: audience,
+		speaker: speaker.name
 	});
+
   // This will handle once socket connects, we add the socket id to the array
 	connections.push(socket);
     console.log("Connected: %s sockets connected.", connections.length);

@@ -23714,7 +23714,7 @@
 	            title: '',
 	            member: {},
 	            audience: [],
-	            speaker: {}
+	            speaker: ''
 	        };
 	    },
 
@@ -23722,9 +23722,10 @@
 	        this.socket = io('http://localhost:3000');
 	        this.socket.on('connect', this.connect);
 	        this.socket.on('disconnect', this.disconnect);
-	        this.socket.on('welcome', this.welcome);
+	        this.socket.on('welcome', this.updateState);
 	        this.socket.on('joined', this.joined);
 	        this.socket.on('audience', this.updateAudience);
+	        this.socket.on('start', this.updateState);
 	    },
 
 	    emit: function emit(eventName, payload) {
@@ -23746,8 +23747,8 @@
 	        this.setState({ status: 'disconnected' });
 	    },
 
-	    welcome: function welcome(serverState) {
-	        this.setState({ title: serverState.title });
+	    updateState: function updateState(serverState) {
+	        this.setState(serverState);
 	    },
 
 	    joined: function joined(member) {
@@ -23763,7 +23764,7 @@
 	        return React.createElement(
 	            'div',
 	            null,
-	            React.createElement(Header, { title: this.state.title, status: this.state.status }),
+	            React.createElement(Header, this.state),
 	            React.createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
 	        );
 	    }
@@ -31389,49 +31390,49 @@
 /* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/*
-	 * Adding reusable components into the parts folder.
-	 * The file will contain header React component.
-	 */
-
 	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var Header = React.createClass({
-	  displayName: 'Header',
+		displayName: 'Header',
 
-	  propTypes: {
-	    title: React.PropTypes.string.isRequired
-	  },
+		propTypes: {
+			title: React.PropTypes.string.isRequired
+		},
 
-	  //Default React method
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      status: 'discunnected'
-	    };
-	  },
+		getDefaultProps: function getDefaultProps() {
+			return {
+				status: 'disconnected'
+			};
+		},
 
-	  render: function render() {
-	    return React.createElement(
-	      'header',
-	      { className: "row" },
-	      React.createElement(
-	        'div',
-	        { className: "col-xs-6" },
-	        React.createElement(
-	          'h2',
-	          null,
-	          this.props.title
-	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: "col-xs-6" },
-	        React.createElement('span', { id: "connection-status", className: this.props.status })
-	      )
-	    );
-	  }
+		render: function render() {
+			return React.createElement(
+				'header',
+				{ className: "row" },
+				React.createElement(
+					'div',
+					{ className: "col-xs-10" },
+					React.createElement(
+						'h2',
+						null,
+						this.props.title
+					),
+					React.createElement(
+						'p',
+						null,
+						this.props.speaker
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: "col-xs-2" },
+					React.createElement('span', { id: "connection-status", className: this.props.status })
+				)
+			);
+		}
+
 	});
 
 	module.exports = Header;
@@ -31526,38 +31527,39 @@
 	var Link = __webpack_require__(157).Link;
 
 	var Join = React.createClass({
-	  displayName: 'Join',
+		displayName: 'Join',
 
-	  join: function join() {
-	    var memberName = React.findDOMNode(this.refs.name).value;
-	    this.props.emit('join', { name: memberName });
-	  },
+		join: function join() {
+			var memberName = React.findDOMNode(this.refs.name).value;
+			this.props.emit('join', { name: memberName });
+		},
 
-	  render: function render() {
-	    return React.createElement(
-	      'form',
-	      { action: "javascript:void(0)", onSubmit: this.join },
-	      React.createElement(
-	        'label',
-	        null,
-	        'Full Name'
-	      ),
-	      React.createElement('input', { ref: "name",
-	        className: "form-control",
-	        placeholder: "enter your full name...",
-	        required: true }),
-	      React.createElement(
-	        'button',
-	        { className: "btn btn-primary" },
-	        'Join'
-	      ),
-	      React.createElement(
-	        Link,
-	        { to: '/speaker' },
-	        'Join as speaker'
-	      )
-	    );
-	  }
+		render: function render() {
+			return React.createElement(
+				'form',
+				{ action: "javascript:void(0)", onSubmit: this.join },
+				React.createElement(
+					'label',
+					null,
+					'Full Name'
+				),
+				React.createElement('input', { ref: "name",
+					className: "form-control",
+					placeholder: "enter your full name...",
+					required: true }),
+				React.createElement(
+					'button',
+					{ className: "btn btn-primary" },
+					'Join'
+				),
+				React.createElement(
+					Link,
+					{ to: "/speaker" },
+					'Start the presentation'
+				)
+			);
+		}
+
 	});
 
 	module.exports = Join;
@@ -31573,42 +31575,42 @@
 	var JoinSpeaker = __webpack_require__(255);
 
 	var Speaker = React.createClass({
-	  displayName: 'Speaker',
+		displayName: 'Speaker',
 
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        Display,
-	        { 'if': this.props.status === 'connected' },
-	        React.createElement(
-	          Display,
-	          { 'if': this.props.member.name && this.props.member.type === 'speaker' },
-	          React.createElement(
-	            'p',
-	            null,
-	            'Questions'
-	          ),
-	          React.createElement(
-	            'p',
-	            null,
-	            'Attendance'
-	          )
-	        ),
-	        React.createElement(
-	          Display,
-	          { 'if': !this.props.member.name },
-	          React.createElement(
-	            'h1',
-	            null,
-	            'Start the presentation'
-	          ),
-	          React.createElement(JoinSpeaker, { emit: this.props.emit })
-	        )
-	      )
-	    );
-	  }
+		render: function render() {
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(
+					Display,
+					{ 'if': this.props.status === 'connected' },
+					React.createElement(
+						Display,
+						{ 'if': this.props.member.name && this.props.member.type === 'speaker' },
+						React.createElement(
+							'p',
+							null,
+							'Questions'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Attendance'
+						)
+					),
+					React.createElement(
+						Display,
+						{ 'if': !this.props.member.name },
+						React.createElement(
+							'h2',
+							null,
+							'Start the presentation'
+						),
+						React.createElement(JoinSpeaker, { emit: this.props.emit })
+					)
+				)
+			);
+		}
 	});
 
 	module.exports = Speaker;
@@ -31617,49 +31619,49 @@
 /* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var JoinSpeaker = React.createClass({
-	  displayName: "JoinSpeaker",
+	  displayName: 'JoinSpeaker',
 
 	  start: function start() {
 	    var speakerName = React.findDOMNode(this.refs.name).value;
 	    var title = React.findDOMNode(this.refs.title).value;
-	    alert("TODO: Join Speaker: " + speakerName + " " + title);
-	    //this.props.emit('start', { name: speakerName, title: title });
+	    this.props.emit('start', { name: speakerName, title: title });
 	  },
 
 	  render: function render() {
 	    return React.createElement(
-	      "form",
+	      'form',
 	      { action: "javascript:void(0)", onSubmit: this.start },
 	      React.createElement(
-	        "label",
+	        'label',
 	        null,
-	        "Full Name"
+	        'Full Name'
 	      ),
-	      React.createElement("input", { ref: "name",
+	      React.createElement('input', { ref: "name",
 	        className: "form-control",
 	        placeholder: "enter your full name...",
 	        required: true }),
 	      React.createElement(
-	        "label",
+	        'label',
 	        null,
-	        "Presentation Title"
+	        'Presentation Title'
 	      ),
-	      React.createElement("input", { ref: "title",
+	      React.createElement('input', { ref: "title",
 	        className: "form-control",
-	        placeholder: "enter a title for this presentation...",
+	        placeholder: "enter a title for this Presentation...",
 	        required: true }),
 	      React.createElement(
-	        "button",
+	        'button',
 	        { className: "btn btn-primary" },
-	        "Join"
+	        'Join'
 	      )
 	    );
 	  }
+
 	});
 
 	module.exports = JoinSpeaker;

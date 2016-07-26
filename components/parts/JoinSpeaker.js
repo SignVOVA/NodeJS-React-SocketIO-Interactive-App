@@ -5,8 +5,7 @@ var JoinSpeaker = React.createClass({
   start() {
     var speakerName = React.findDOMNode(this.refs.name).value;
     var title = React.findDOMNode(this.refs.title).value;
-    alert("TODO: Join Speaker: " + speakerName + " " + title);
-    //this.props.emit('start', { name: speakerName, title: title });
+    this.props.emit('start', { name: speakerName, title: title });
   },
 
   render() {
@@ -15,21 +14,22 @@ var JoinSpeaker = React.createClass({
 
         <label>Full Name</label>
         <input ref="name"
-               className="form-control"
+             className="form-control"
                placeholder="enter your full name..."
                required />
 
-         <label>Presentation Title</label>
-         <input ref="title"
-                className="form-control"
-                placeholder="enter a title for this presentation..."
-                required />
+        <label>Presentation Title</label>
+        <input ref="title"
+             className="form-control"
+               placeholder="enter a title for this Presentation..."
+               required />
 
         <button className="btn btn-primary">Join</button>
 
       </form>
     );
   }
+
 });
 
 module.exports = JoinSpeaker;
