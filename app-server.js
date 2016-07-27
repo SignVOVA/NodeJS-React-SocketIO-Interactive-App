@@ -8,6 +8,12 @@ var audience = [];
 var speaker = {};
 var questions = require('./app-questions');
 var currentQuestion = false;
+var results = {
+	a: 0,
+	b: 0,
+	c: 0,
+	d: 0
+};
 
 app.use(express.static('./public'));
 app.use(express.static('./node_modules/bootstrap/dist'));
@@ -62,8 +68,14 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('ask', function(question) {
 		currentQuestion = question;
+		results = {a:0, b:0, c:0, d:0};
 		io.sockets.emit('ask', currentQuestion);
-		console.log("Question Asked: %s", question.q);
+		console.log("Question Asked: '%s'", question.q);
+	});
+
+	socket.on('answer', function(payload) {
+		results[payload.choice]++;
+		console.log("Answer: '%s' - %j", payload.choice, results);
 	});
 
   // socket.emit is used to emit events that can be handled by the client
