@@ -55,8 +55,8 @@
 	var APP = __webpack_require__(199);
 	var Audience = __webpack_require__(251);
 	var Speaker = __webpack_require__(254);
-	var Board = __webpack_require__(256);
-	var Whoops404 = __webpack_require__(257);
+	var Board = __webpack_require__(257);
+	var Whoops404 = __webpack_require__(258);
 
 	var routes = React.createElement(
 		Route,
@@ -31587,6 +31587,7 @@
 	var React = __webpack_require__(1);
 	var Display = __webpack_require__(252);
 	var JoinSpeaker = __webpack_require__(255);
+	var Attendance = __webpack_require__(256);
 
 	var Speaker = React.createClass({
 		displayName: 'Speaker',
@@ -31606,11 +31607,7 @@
 							null,
 							'Questions'
 						),
-						React.createElement(
-							'p',
-							null,
-							'Attendance'
-						)
+						React.createElement(Attendance, { audience: this.props.audience })
 					),
 					React.createElement(
 						Display,
@@ -31638,43 +31635,43 @@
 	var React = __webpack_require__(1);
 
 	var JoinSpeaker = React.createClass({
-	  displayName: 'JoinSpeaker',
+		displayName: 'JoinSpeaker',
 
-	  start: function start() {
-	    var speakerName = React.findDOMNode(this.refs.name).value;
-	    var title = React.findDOMNode(this.refs.title).value;
-	    this.props.emit('start', { name: speakerName, title: title });
-	  },
+		start: function start() {
+			var speakerName = React.findDOMNode(this.refs.name).value;
+			var title = React.findDOMNode(this.refs.title).value;
+			this.props.emit('start', { name: speakerName, title: title });
+		},
 
-	  render: function render() {
-	    return React.createElement(
-	      'form',
-	      { action: "javascript:void(0)", onSubmit: this.start },
-	      React.createElement(
-	        'label',
-	        null,
-	        'Full Name'
-	      ),
-	      React.createElement('input', { ref: "name",
-	        className: "form-control",
-	        placeholder: "enter your full name...",
-	        required: true }),
-	      React.createElement(
-	        'label',
-	        null,
-	        'Presentation Title'
-	      ),
-	      React.createElement('input', { ref: "title",
-	        className: "form-control",
-	        placeholder: "enter a title for this Presentation...",
-	        required: true }),
-	      React.createElement(
-	        'button',
-	        { className: "btn btn-primary" },
-	        'Join'
-	      )
-	    );
-	  }
+		render: function render() {
+			return React.createElement(
+				'form',
+				{ action: "javascript:void(0)", onSubmit: this.start },
+				React.createElement(
+					'label',
+					null,
+					'Full Name'
+				),
+				React.createElement('input', { ref: "name",
+					className: "form-control",
+					placeholder: "enter your full name...",
+					required: true }),
+				React.createElement(
+					'label',
+					null,
+					'Presentation Title'
+				),
+				React.createElement('input', { ref: "title",
+					className: "form-control",
+					placeholder: "enter a title for this Presentation...",
+					required: true }),
+				React.createElement(
+					'button',
+					{ className: "btn btn-primary" },
+					'Join'
+				)
+			);
+		}
 
 	});
 
@@ -31682,6 +31679,77 @@
 
 /***/ },
 /* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var Attendance = React.createClass({
+		displayName: "Attendance",
+
+		addMemberRow: function addMemberRow(member, i) {
+			return React.createElement(
+				"tr",
+				{ key: i },
+				React.createElement(
+					"td",
+					null,
+					member.name
+				),
+				React.createElement(
+					"td",
+					null,
+					member.id
+				)
+			);
+		},
+
+		render: function render() {
+			return React.createElement(
+				"div",
+				null,
+				React.createElement(
+					"h2",
+					null,
+					"Attendance - ",
+					this.props.audience.length
+				),
+				React.createElement(
+					"table",
+					{ className: "table table-stripped" },
+					React.createElement(
+						"thead",
+						null,
+						React.createElement(
+							"tr",
+							null,
+							React.createElement(
+								"th",
+								null,
+								"Audience Member"
+							),
+							React.createElement(
+								"th",
+								null,
+								"Socket ID"
+							)
+						)
+					),
+					React.createElement(
+						"tbody",
+						null,
+						this.props.audience.map(this.addMemberRow)
+					)
+				)
+			);
+		}
+	});
+
+	module.exports = Attendance;
+
+/***/ },
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31704,7 +31772,7 @@
 	module.exports = Board;
 
 /***/ },
-/* 257 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
