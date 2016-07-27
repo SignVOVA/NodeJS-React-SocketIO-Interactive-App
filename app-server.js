@@ -6,6 +6,7 @@ var connections = [];
 var title = 'Untitled Presentation';
 var audience = [];
 var speaker = {};
+var questions = require('./app-questions');
 
 app.use(express.static('./public'));
 app.use(express.static('./node_modules/bootstrap/dist'));
@@ -63,7 +64,8 @@ io.sockets.on('connection', function (socket) {
 		title: title,
 		// One - when the user joins the presentation
 		audience: audience,
-		speaker: speaker.name
+		speaker: speaker.name,
+		questions: questions
 	});
 
   // This will handle once socket connects, we add the socket id to the array

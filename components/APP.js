@@ -13,7 +13,8 @@ var APP = React.createClass({
             title: '',
             member: {},
             audience: [],
-            speaker: ''
+            speaker: '',
+            questions: []
         }
     },
     // This handles broadcasting and end event
