@@ -7,6 +7,7 @@ var title = 'Untitled Presentation';
 var audience = [];
 var speaker = {};
 var questions = require('./app-questions');
+var currentQuestion = false;
 
 app.use(express.static('./public'));
 app.use(express.static('./node_modules/bootstrap/dist'));
@@ -59,13 +60,20 @@ io.sockets.on('connection', function (socket) {
 		console.log("Presentation Started: '%s' by %s", title, speaker.name);
 	});
 
+	socket.on('ask', function(question) {
+		currentQuestion = question;
+		io.sockets.emit('ask', currentQuestion);
+		console.log("Question Asked: %s", question.q);
+	});
+
   // socket.emit is used to emit events that can be handled by the client
 	socket.emit('welcome', {
 		title: title,
 		// One - when the user joins the presentation
 		audience: audience,
 		speaker: speaker.name,
-		questions: questions
+		questions: questions,
+		currentQuestion: currentQuestion
 	});
 
   // This will handle once socket connects, we add the socket id to the array

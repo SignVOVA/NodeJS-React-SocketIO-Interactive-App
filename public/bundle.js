@@ -23715,7 +23715,8 @@
 	            member: {},
 	            audience: [],
 	            speaker: '',
-	            questions: []
+	            questions: [],
+	            currentQuestion: false
 	        };
 	    },
 	    // This handles broadcasting and end event
@@ -23728,6 +23729,7 @@
 	        this.socket.on('audience', this.updateAudience);
 	        this.socket.on('start', this.start);
 	        this.socket.on('end', this.updateState);
+	        this.socket.on('ask', this.ask);
 	    },
 
 	    emit: function emit(eventName, payload) {
@@ -23773,6 +23775,10 @@
 	            sessionStorage.title = presentation.title;
 	        }
 	        this.setState(presentation);
+	    },
+
+	    ask: function ask(question) {
+	        this.setState({ currentQuestion: question });
 	    },
 
 	    render: function render() {
@@ -31462,6 +31468,17 @@
 	var Display = __webpack_require__(252);
 	var Join = __webpack_require__(253);
 
+	/*
+	 * Audience > Question
+	 * When the Speaker asks a question we will emit an ask event and send the question to the server
+	 * Quesiton > app-server
+	 * The server then gather that question by listening to an ask event and emiting the ask event back to all of the connected sockets
+	 * APP
+	 * The APP will listen to that ask event and handle it by setting the state of the current question
+	 * Audience
+	 * And then we will display the current question in the audience component by using display and nesting the current question in that disaplay
+	 */
+
 	var Audience = React.createClass({
 		displayName: 'Audience',
 
@@ -31476,21 +31493,34 @@
 						Display,
 						{ 'if': this.props.member.name },
 						React.createElement(
-							'h1',
-							null,
-							'Welcome ',
-							this.props.member.name
+							Display,
+							{ 'if': !this.props.currentQuestion },
+							React.createElement(
+								'h1',
+								null,
+								'Welcome ',
+								this.props.member.name
+							),
+							React.createElement(
+								'p',
+								null,
+								this.props.audience.length,
+								' audience members connected'
+							),
+							React.createElement(
+								'p',
+								null,
+								'Questions will appear here.'
+							)
 						),
 						React.createElement(
-							'p',
-							null,
-							this.props.audience.length,
-							' audience members connected'
-						),
-						React.createElement(
-							'p',
-							null,
-							'Questions will appear here.'
+							Display,
+							{ 'if': this.props.currentQuestion },
+							React.createElement(
+								'h3',
+								null,
+								this.props.currentQuestion.q
+							)
 						)
 					),
 					React.createElement(
@@ -31604,7 +31634,7 @@
 					React.createElement(
 						Display,
 						{ 'if': this.props.member.name && this.props.member.type === 'speaker' },
-						React.createElement(Questions, { questions: this.props.questions }),
+						React.createElement(Questions, { questions: this.props.questions, emit: this.props.emit }),
 						React.createElement(Attendance, { audience: this.props.audience })
 					),
 					React.createElement(
@@ -31750,20 +31780,24 @@
 /* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 
 	var Questions = React.createClass({
-		displayName: "Questions",
+		displayName: 'Questions',
+
+		ask: function ask(question) {
+			this.props.emit('ask', question);
+		},
 
 		addQuestion: function addQuestion(question, i) {
 			return React.createElement(
-				"div",
+				'div',
 				{ key: i, className: "col-xs-12 col-sm-6 col-md-3" },
 				React.createElement(
-					"span",
-					null,
+					'span',
+					{ onClick: this.ask.bind(null, question) },
 					question.q
 				)
 			);
@@ -31771,12 +31805,12 @@
 
 		render: function render() {
 			return React.createElement(
-				"div",
+				'div',
 				{ id: "questions", className: "row" },
 				React.createElement(
-					"h2",
+					'h2',
 					null,
-					"Questions"
+					'Questions'
 				),
 				this.props.questions.map(this.addQuestion)
 			);
