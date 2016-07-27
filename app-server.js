@@ -23,6 +23,11 @@ io.sockets.on('connection', function (socket) {
 			audience.splice(audience.indexOf(member), 1);
 			io.sockets.emit('audience', audience);
 			console.log("Left: %s (%s audience members)", member.name, audience.length)
+		} else if (this.id === speaker.id) {
+			console.log("%s has left. '%s' is over.", speaker.name, title);
+			speaker = {};
+			title = "Untitled Presentation";
+			io.sockets.emit('end', { title: title, speaker: '' });
 		}
     // We are going to use splice to remove that connection from the array. By using the indexOf we find the current connection
     connections.splice(connections.indexOf(socket), 1);
