@@ -6,8 +6,7 @@ Socket technology is a natural fit for presentation and chat applications. This 
 * clone the project
 * npm install
 * npm start
-
-Navigate to localhost:3000
+*Navigate to localhost:3000*
 
 ## Topics include:
 * Setting up the environment
