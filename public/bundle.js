@@ -23720,7 +23720,15 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(1);
 
@@ -23740,11 +23748,14 @@
 
 	var RouteHandler = _reactRouter2['default'].RouteHandler;
 
-	var APP = _react2['default'].createClass({
-	    displayName: 'APP',
+	var APP = (function (_React$Component) {
+	    _inherits(APP, _React$Component);
 
-	    getInitialState: function getInitialState() {
-	        return {
+	    function APP() {
+	        _classCallCheck(this, APP);
+
+	        _get(Object.getPrototypeOf(APP.prototype), 'constructor', this).call(this);
+	        this.state = {
 	            status: 'disconnected',
 	            title: '',
 	            member: {},
@@ -23754,88 +23765,92 @@
 	            currentQuestion: false,
 	            results: {}
 	        };
-	    },
-	    // This handles broadcasting and end event
-	    componentWillMount: function componentWillMount() {
-	        this.socket = (0, _socketIoClient2['default'])('http://localhost:3000');
-	        this.socket.on('connect', this.connect);
-	        this.socket.on('disconnect', this.disconnect);
-	        this.socket.on('welcome', this.updateState);
-	        this.socket.on('joined', this.joined);
-	        this.socket.on('audience', this.updateAudience);
-	        this.socket.on('start', this.start);
-	        this.socket.on('end', this.updateState);
-	        this.socket.on('ask', this.ask);
-	        this.socket.on('results', this.updateResults);
-	    },
-
-	    emit: function emit(eventName, payload) {
-	        this.socket.emit(eventName, payload);
-	    },
-
-	    connect: function connect() {
-
-	        var member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null;
-
-	        if (member && member.type === 'audience') {
-	            this.emit('join', member);
-	        } else if (member && member.type === 'speaker') {
-	            this.emit('start', { name: member.name, title: sessionStorage.title });
-	        }
-
-	        this.setState({ status: 'connected' });
-	    },
-	    // This should handle: refreshing the speaker. Leaving the speaker. And disconnecting the application
-	    disconnect: function disconnect() {
-	        this.setState({
-	            status: 'disconnected',
-	            title: 'disconnected',
-	            speaker: ''
-	        });
-	    },
-
-	    updateState: function updateState(serverState) {
-	        this.setState(serverState);
-	    },
-
-	    joined: function joined(member) {
-	        sessionStorage.member = JSON.stringify(member);
-	        this.setState({ member: member });
-	    },
-
-	    updateAudience: function updateAudience(newAudience) {
-	        this.setState({ audience: newAudience });
-	    },
-
-	    start: function start(presentation) {
-	        if (this.state.member.type === 'speaker') {
-	            sessionStorage.title = presentation.title;
-	        }
-	        this.setState(presentation);
-	    },
-
-	    ask: function ask(question) {
-	        sessionStorage.answer = '';
-	        this.setState({
-	            currentQuestion: question,
-	            results: { a: 0, b: 0, c: 0, d: 0 }
-	        });
-	    },
-
-	    updateResults: function updateResults(data) {
-	        this.setState({ results: data });
-	    },
-
-	    render: function render() {
-	        return _react2['default'].createElement(
-	            'div',
-	            null,
-	            _react2['default'].createElement(_partsHeader2['default'], this.state),
-	            _react2['default'].createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
-	        );
+	        this.emit = this.emit.bind(this);
 	    }
 
-	});
+	    _createClass(APP, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            var _this = this;
+
+	            this.socket = (0, _socketIoClient2['default'])('http://localhost:3000');
+
+	            this.socket.on('connect', function () {
+
+	                var member = sessionStorage.member ? JSON.parse(sessionStorage.member) : null;
+
+	                if (member && member.type === 'audience') {
+	                    _this.emit('join', member);
+	                } else if (member && member.type === 'speaker') {
+	                    _this.emit('start', { name: member.name, title: sessionStorage.title });
+	                }
+
+	                _this.setState({ status: 'connected' });
+	            });
+
+	            this.socket.on('disconnect', function () {
+	                _this.setState({
+	                    status: 'disconnected',
+	                    title: 'disconnected',
+	                    speaker: ''
+	                });
+	            });
+
+	            this.socket.on('welcome', function (x) {
+	                return _this.setState(x);
+	            });
+
+	            this.socket.on('joined', function (member) {
+	                sessionStorage.member = JSON.stringify(member);
+	                _this.setState({ member: member });
+	            });
+
+	            this.socket.on('audience', function (newAudience) {
+	                _this.setState({ audience: newAudience });
+	            });
+
+	            this.socket.on('start', function (presentation) {
+	                if (_this.state.member.type === 'speaker') {
+	                    sessionStorage.title = presentation.title;
+	                }
+	                _this.setState(presentation);
+	            });
+
+	            this.socket.on('end', function (x) {
+	                return _this.setState(x);
+	            });
+
+	            this.socket.on('ask', function (question) {
+	                sessionStorage.answer = '';
+	                _this.setState({
+	                    currentQuestion: question,
+	                    results: { a: 0, b: 0, c: 0, d: 0 }
+	                });
+	            });
+
+	            this.socket.on('results', function (data) {
+	                _this.setState({ results: data });
+	            });
+	        }
+	    }, {
+	        key: 'emit',
+	        value: function emit(eventName, payload) {
+	            this.socket.emit(eventName, payload);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                'div',
+	                null,
+	                _react2['default'].createElement(_partsHeader2['default'], this.state),
+	                _react2['default'].createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
+	            );
+	        }
+	    }]);
+
+	    return APP;
+	})(_react2['default'].Component);
 
 	module.exports = APP;
 
