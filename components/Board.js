@@ -1,8 +1,8 @@
-var React = require('react');
-var Display = require('./parts/Display');
+import React from 'react'
+import Display from './parts/Display'
 var BarChart = require('react-d3').BarChart;
 
-var Board = React.createClass({
+class Board extends React.Component{
 
 	barGraphData(results) {
 		return Object.keys(results).map(function(choice) {
@@ -11,7 +11,7 @@ var Board = React.createClass({
 				value: results[choice]
 			};
 		});
-	},
+	}
 
 	render() {
 		return (
@@ -31,6 +31,6 @@ var Board = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
 module.exports = Board;

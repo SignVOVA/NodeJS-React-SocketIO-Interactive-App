@@ -1,8 +1,8 @@
-var React = require('react');
-var Router = require('react-router');
+import React from 'react'
+import Router from 'react-router'
 var Link = Router.Link;
 
-var Whoops404 = React.createClass({
+class Whoops404 extends React.Component{
 	render() {
 		return (
 			<div id="not-found">
@@ -17,6 +17,6 @@ var Whoops404 = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
 module.exports = Whoops404;

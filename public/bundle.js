@@ -23720,14 +23720,27 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var React = __webpack_require__(1);
-	var Router = __webpack_require__(157);
-	var RouteHandler = Router.RouteHandler;
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var io = __webpack_require__(200);
-	var Header = __webpack_require__(250);
+	var _react = __webpack_require__(1);
 
-	var APP = React.createClass({
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(157);
+
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+
+	var _socketIoClient = __webpack_require__(200);
+
+	var _socketIoClient2 = _interopRequireDefault(_socketIoClient);
+
+	var _partsHeader = __webpack_require__(250);
+
+	var _partsHeader2 = _interopRequireDefault(_partsHeader);
+
+	var RouteHandler = _reactRouter2['default'].RouteHandler;
+
+	var APP = _react2['default'].createClass({
 	    displayName: 'APP',
 
 	    getInitialState: function getInitialState() {
@@ -23744,7 +23757,7 @@
 	    },
 	    // This handles broadcasting and end event
 	    componentWillMount: function componentWillMount() {
-	        this.socket = io('http://localhost:3000');
+	        this.socket = (0, _socketIoClient2['default'])('http://localhost:3000');
 	        this.socket.on('connect', this.connect);
 	        this.socket.on('disconnect', this.disconnect);
 	        this.socket.on('welcome', this.updateState);
@@ -23814,11 +23827,11 @@
 	    },
 
 	    render: function render() {
-	        return React.createElement(
+	        return _react2['default'].createElement(
 	            'div',
 	            null,
-	            React.createElement(Header, this.state),
-	            React.createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
+	            _react2['default'].createElement(_partsHeader2['default'], this.state),
+	            _react2['default'].createElement(RouteHandler, _extends({ emit: this.emit }, this.state))
 	        );
 	    }
 
@@ -31496,10 +31509,29 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Display = __webpack_require__(252);
-	var Join = __webpack_require__(253);
-	var Ask = __webpack_require__(254);
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _partsDisplay = __webpack_require__(252);
+
+	var _partsDisplay2 = _interopRequireDefault(_partsDisplay);
+
+	var _partsJoin = __webpack_require__(253);
+
+	var _partsJoin2 = _interopRequireDefault(_partsJoin);
+
+	var _partsAsk = __webpack_require__(254);
 
 	/*
 	 * Audience > Question
@@ -31512,60 +31544,73 @@
 	 * And then we will display the current question in the audience component by using display and nesting the current question in that disaplay
 	 */
 
-	var Audience = React.createClass({
-		displayName: 'Audience',
+	var _partsAsk2 = _interopRequireDefault(_partsAsk);
 
-		render: function render() {
-			return React.createElement(
-				'div',
-				null,
-				React.createElement(
-					Display,
-					{ 'if': this.props.status === 'connected' },
-					React.createElement(
-						Display,
-						{ 'if': this.props.member.name },
-						React.createElement(
-							Display,
-							{ 'if': !this.props.currentQuestion },
-							React.createElement(
-								'h2',
-								null,
-								'Welcome ',
-								this.props.member.name
+	var Audience = (function (_React$Component) {
+		_inherits(Audience, _React$Component);
+
+		function Audience() {
+			_classCallCheck(this, Audience);
+
+			_get(Object.getPrototypeOf(Audience.prototype), 'constructor', this).apply(this, arguments);
+		}
+
+		_createClass(Audience, [{
+			key: 'render',
+			value: function render() {
+				return _react2['default'].createElement(
+					'div',
+					null,
+					_react2['default'].createElement(
+						_partsDisplay2['default'],
+						{ 'if': this.props.status === 'connected' },
+						_react2['default'].createElement(
+							_partsDisplay2['default'],
+							{ 'if': this.props.member.name },
+							_react2['default'].createElement(
+								_partsDisplay2['default'],
+								{ 'if': !this.props.currentQuestion },
+								_react2['default'].createElement(
+									'h2',
+									null,
+									'Welcome ',
+									this.props.member.name
+								),
+								_react2['default'].createElement(
+									'p',
+									null,
+									this.props.audience.length,
+									' audience members connected'
+								),
+								_react2['default'].createElement(
+									'p',
+									null,
+									'Questions will appear here.'
+								)
 							),
-							React.createElement(
-								'p',
-								null,
-								this.props.audience.length,
-								' audience members connected'
-							),
-							React.createElement(
-								'p',
-								null,
-								'Questions will appear here.'
+							_react2['default'].createElement(
+								_partsDisplay2['default'],
+								{ 'if': this.props.currentQuestion },
+								_react2['default'].createElement(_partsAsk2['default'], { question: this.props.currentQuestion, emit: this.props.emit })
 							)
 						),
-						React.createElement(
-							Display,
-							{ 'if': this.props.currentQuestion },
-							React.createElement(Ask, { question: this.props.currentQuestion, emit: this.props.emit })
+						_react2['default'].createElement(
+							_partsDisplay2['default'],
+							{ 'if': !this.props.member.name },
+							_react2['default'].createElement(
+								'h1',
+								null,
+								'Join the session'
+							),
+							_react2['default'].createElement(_partsJoin2['default'], { emit: this.props.emit })
 						)
-					),
-					React.createElement(
-						Display,
-						{ 'if': !this.props.member.name },
-						React.createElement(
-							'h1',
-							null,
-							'Join the session'
-						),
-						React.createElement(Join, { emit: this.props.emit })
 					)
-				)
-			);
-		}
-	});
+				);
+			}
+		}]);
+
+		return Audience;
+	})(_react2['default'].Component);
 
 	module.exports = Audience;
 
@@ -31749,42 +31794,77 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Display = __webpack_require__(252);
-	var JoinSpeaker = __webpack_require__(256);
-	var Attendance = __webpack_require__(257);
-	var Questions = __webpack_require__(258);
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var Speaker = React.createClass({
-		displayName: 'Speaker',
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-		render: function render() {
-			return React.createElement(
-				'div',
-				null,
-				React.createElement(
-					Display,
-					{ 'if': this.props.status === 'connected' },
-					React.createElement(
-						Display,
-						{ 'if': this.props.member.name && this.props.member.type === 'speaker' },
-						React.createElement(Questions, { questions: this.props.questions, emit: this.props.emit }),
-						React.createElement(Attendance, { audience: this.props.audience })
-					),
-					React.createElement(
-						Display,
-						{ 'if': !this.props.member.name },
-						React.createElement(
-							'h2',
-							null,
-							'Start the presentation'
-						),
-						React.createElement(JoinSpeaker, { emit: this.props.emit })
-					)
-				)
-			);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _partsDisplay = __webpack_require__(252);
+
+	var _partsDisplay2 = _interopRequireDefault(_partsDisplay);
+
+	var _partsJoinSpeaker = __webpack_require__(256);
+
+	var _partsJoinSpeaker2 = _interopRequireDefault(_partsJoinSpeaker);
+
+	var _partsAttendance = __webpack_require__(257);
+
+	var _partsAttendance2 = _interopRequireDefault(_partsAttendance);
+
+	var _partsQuestions = __webpack_require__(258);
+
+	var _partsQuestions2 = _interopRequireDefault(_partsQuestions);
+
+	var Speaker = (function (_React$Component) {
+		_inherits(Speaker, _React$Component);
+
+		function Speaker() {
+			_classCallCheck(this, Speaker);
+
+			_get(Object.getPrototypeOf(Speaker.prototype), 'constructor', this).apply(this, arguments);
 		}
-	});
+
+		_createClass(Speaker, [{
+			key: 'render',
+			value: function render() {
+				return _react2['default'].createElement(
+					'div',
+					null,
+					_react2['default'].createElement(
+						_partsDisplay2['default'],
+						{ 'if': this.props.status === 'connected' },
+						_react2['default'].createElement(
+							_partsDisplay2['default'],
+							{ 'if': this.props.member.name && this.props.member.type === 'speaker' },
+							_react2['default'].createElement(_partsQuestions2['default'], { questions: this.props.questions, emit: this.props.emit }),
+							_react2['default'].createElement(_partsAttendance2['default'], { audience: this.props.audience })
+						),
+						_react2['default'].createElement(
+							_partsDisplay2['default'],
+							{ 'if': !this.props.member.name },
+							_react2['default'].createElement(
+								'h2',
+								null,
+								'Start the presentation'
+							),
+							_react2['default'].createElement(_partsJoinSpeaker2['default'], { emit: this.props.emit })
+						)
+					)
+				);
+			}
+		}]);
+
+		return Speaker;
+	})(_react2['default'].Component);
 
 	module.exports = Speaker;
 
@@ -31959,46 +32039,74 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Display = __webpack_require__(252);
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _partsDisplay = __webpack_require__(252);
+
+	var _partsDisplay2 = _interopRequireDefault(_partsDisplay);
+
 	var BarChart = __webpack_require__(260).BarChart;
 
-	var Board = React.createClass({
-		displayName: 'Board',
+	var Board = (function (_React$Component) {
+		_inherits(Board, _React$Component);
 
-		barGraphData: function barGraphData(results) {
-			return Object.keys(results).map(function (choice) {
-				return {
-					label: choice,
-					value: results[choice]
-				};
-			});
-		},
+		function Board() {
+			_classCallCheck(this, Board);
 
-		render: function render() {
-			return React.createElement(
-				'div',
-				{ id: "scoreboard" },
-				React.createElement(
-					Display,
-					{ 'if': this.props.status === 'connected' && this.props.currentQuestion },
-					React.createElement(BarChart, { data: this.barGraphData(this.props.results),
-						title: this.props.currentQuestion.q,
-						height: window.innerHeight * 0.6,
-						width: window.innerWidth * 0.9 })
-				),
-				React.createElement(
-					Display,
-					{ 'if': this.props.status === 'connected' && !this.props.currentQuestion },
-					React.createElement(
-						'h3',
-						null,
-						'Awaiting a Question...'
-					)
-				)
-			);
+			_get(Object.getPrototypeOf(Board.prototype), 'constructor', this).apply(this, arguments);
 		}
-	});
+
+		_createClass(Board, [{
+			key: 'barGraphData',
+			value: function barGraphData(results) {
+				return Object.keys(results).map(function (choice) {
+					return {
+						label: choice,
+						value: results[choice]
+					};
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2['default'].createElement(
+					'div',
+					{ id: "scoreboard" },
+					_react2['default'].createElement(
+						_partsDisplay2['default'],
+						{ 'if': this.props.status === 'connected' && this.props.currentQuestion },
+						_react2['default'].createElement(BarChart, { data: this.barGraphData(this.props.results),
+							title: this.props.currentQuestion.q,
+							height: window.innerHeight * 0.6,
+							width: window.innerWidth * 0.9 })
+					),
+					_react2['default'].createElement(
+						_partsDisplay2['default'],
+						{ 'if': this.props.status === 'connected' && !this.props.currentQuestion },
+						_react2['default'].createElement(
+							'h3',
+							null,
+							'Awaiting a Question...'
+						)
+					)
+				);
+			}
+		}]);
+
+		return Board;
+	})(_react2['default'].Component);
 
 	module.exports = Board;
 
@@ -50666,45 +50774,72 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Router = __webpack_require__(157);
-	var Link = Router.Link;
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var Whoops404 = React.createClass({
-		displayName: 'Whoops404',
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-		render: function render() {
-			return React.createElement(
-				'div',
-				{ id: "not-found" },
-				React.createElement(
-					'h1',
-					null,
-					'Whoops...'
-				),
-				React.createElement(
-					'p',
-					null,
-					'We cannot find the page that you have requested. Were you looking for one of these: '
-				),
-				React.createElement(
-					Link,
-					{ to: "/" },
-					'Join as Audience'
-				),
-				React.createElement(
-					Link,
-					{ to: "/speaker" },
-					'Start the presentation'
-				),
-				React.createElement(
-					Link,
-					{ to: "/board" },
-					'View the board'
-				)
-			);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(157);
+
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+
+	var Link = _reactRouter2['default'].Link;
+
+	var Whoops404 = (function (_React$Component) {
+		_inherits(Whoops404, _React$Component);
+
+		function Whoops404() {
+			_classCallCheck(this, Whoops404);
+
+			_get(Object.getPrototypeOf(Whoops404.prototype), 'constructor', this).apply(this, arguments);
 		}
-	});
+
+		_createClass(Whoops404, [{
+			key: 'render',
+			value: function render() {
+				return _react2['default'].createElement(
+					'div',
+					{ id: "not-found" },
+					_react2['default'].createElement(
+						'h1',
+						null,
+						'Whoops...'
+					),
+					_react2['default'].createElement(
+						'p',
+						null,
+						'We cannot find the page that you have requested. Were you looking for one of these: '
+					),
+					_react2['default'].createElement(
+						Link,
+						{ to: "/" },
+						'Join as Audience'
+					),
+					_react2['default'].createElement(
+						Link,
+						{ to: "/speaker" },
+						'Start the presentation'
+					),
+					_react2['default'].createElement(
+						Link,
+						{ to: "/board" },
+						'View the board'
+					)
+				);
+			}
+		}]);
+
+		return Whoops404;
+	})(_react2['default'].Component);
 
 	module.exports = Whoops404;
 

@@ -1,10 +1,10 @@
-var React = require('react');
-var Display = require('./parts/Display');
-var JoinSpeaker = require('./parts/JoinSpeaker');
-var Attendance = require('./parts/Attendance');
-var Questions = require('./parts/Questions');
+import React from 'react'
+import Display from './parts/Display'
+import JoinSpeaker from './parts/JoinSpeaker'
+import Attendance from './parts/Attendance'
+import Questions from './parts/Questions'
 
-var Speaker = React.createClass({
+class Speaker extends React.Component{
 	render() {
 		return (
 			<div>
@@ -24,6 +24,6 @@ var Speaker = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
 module.exports = Speaker;
