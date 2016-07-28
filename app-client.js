@@ -1,14 +1,11 @@
-var React = require('react');
-var Router = require('react-router');
-var Route = Router.Route;
-var DefaultRoute = Router.DefaultRoute;
-var NotFoundRoute = Router.NotFoundRoute;
-
-var APP = require('./components/APP');
-var Audience = require('./components/Audience');
-var Speaker = require('./components/Speaker');
-var Board = require('./components/Board');
-var Whoops404 = require('./components/Whoops404');
+import React from 'react'
+import Router from 'react-router'
+import APP from './components/APP'
+import Audience from './components/Audience'
+import Speaker from './components/Speaker'
+import Board from './components/Board'
+import Whoops404 from './components/Whoops404'
+var { Route, DefaultRoute, NotFoundRoute } = Router;
 
 var routes = (
 	<Route handler={APP}>

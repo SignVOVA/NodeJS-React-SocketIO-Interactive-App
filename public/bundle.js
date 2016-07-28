@@ -46,29 +46,51 @@
 
 	'use strict';
 
-	var React = __webpack_require__(1);
-	var Router = __webpack_require__(157);
-	var Route = Router.Route;
-	var DefaultRoute = Router.DefaultRoute;
-	var NotFoundRoute = Router.NotFoundRoute;
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var APP = __webpack_require__(199);
-	var Audience = __webpack_require__(251);
-	var Speaker = __webpack_require__(255);
-	var Board = __webpack_require__(259);
-	var Whoops404 = __webpack_require__(315);
+	var _react = __webpack_require__(1);
 
-	var routes = React.createElement(
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(157);
+
+	var _reactRouter2 = _interopRequireDefault(_reactRouter);
+
+	var _componentsAPP = __webpack_require__(199);
+
+	var _componentsAPP2 = _interopRequireDefault(_componentsAPP);
+
+	var _componentsAudience = __webpack_require__(251);
+
+	var _componentsAudience2 = _interopRequireDefault(_componentsAudience);
+
+	var _componentsSpeaker = __webpack_require__(255);
+
+	var _componentsSpeaker2 = _interopRequireDefault(_componentsSpeaker);
+
+	var _componentsBoard = __webpack_require__(259);
+
+	var _componentsBoard2 = _interopRequireDefault(_componentsBoard);
+
+	var _componentsWhoops404 = __webpack_require__(315);
+
+	var _componentsWhoops4042 = _interopRequireDefault(_componentsWhoops404);
+
+	var Route = _reactRouter2['default'].Route;
+	var DefaultRoute = _reactRouter2['default'].DefaultRoute;
+	var NotFoundRoute = _reactRouter2['default'].NotFoundRoute;
+
+	var routes = _react2['default'].createElement(
 		Route,
-		{ handler: APP },
-		React.createElement(DefaultRoute, { handler: Audience }),
-		React.createElement(Route, { name: "speaker", path: "speaker", handler: Speaker }),
-		React.createElement(Route, { name: "board", path: "board", handler: Board }),
-		React.createElement(NotFoundRoute, { handler: Whoops404 })
+		{ handler: _componentsAPP2['default'] },
+		_react2['default'].createElement(DefaultRoute, { handler: _componentsAudience2['default'] }),
+		_react2['default'].createElement(Route, { name: "speaker", path: "speaker", handler: _componentsSpeaker2['default'] }),
+		_react2['default'].createElement(Route, { name: "board", path: "board", handler: _componentsBoard2['default'] }),
+		_react2['default'].createElement(NotFoundRoute, { handler: _componentsWhoops4042['default'] })
 	);
 
-	Router.run(routes, function (Handler) {
-		React.render(React.createElement(Handler, null), document.getElementById('react-container'));
+	_reactRouter2['default'].run(routes, function (Handler) {
+		_react2['default'].render(_react2['default'].createElement(Handler, null), document.getElementById('react-container'));
 	});
 
 /***/ },
