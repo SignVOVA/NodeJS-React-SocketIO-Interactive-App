@@ -1,16 +1,6 @@
 var React = require('react');
 
-var Header = React.createClass({
-
-	propTypes: {
-		title: React.PropTypes.string.isRequired
-	},
-
-	getDefaultProps() {
-		return {
-			status: 'disconnected'
-		}
-	},
+class Header extends React.Component{
 
 	render() {
 		return (
@@ -26,6 +16,14 @@ var Header = React.createClass({
 		);
 	}
 
-});
+}
+
+Header.propTypes = {
+	title: React.PropTypes.string.isRequired
+};
+
+Header.defaultProps = {
+	status: 'disconnected'
+};
 
 module.exports = Header;
