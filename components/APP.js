@@ -55,7 +55,7 @@ var APP = React.createClass({
             status: 'disconnected',
             title: 'disconnected',
             speaker: ''
-          });
+        });
     },
 
     updateState(serverState) {
@@ -80,11 +80,14 @@ var APP = React.createClass({
 
     ask(question) {
         sessionStorage.answer = '';
-        this.setState({ currentQuestion: question });
+        this.setState({
+            currentQuestion: question,
+            results: {a:0,b:0,c:0,d:0}
+        });
     },
 
     updateResults(data) {
-      this.setState({ results: data });
+        this.setState({ results: data });
     },
 
     render() {
